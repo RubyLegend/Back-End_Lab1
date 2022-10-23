@@ -12,9 +12,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{address}}/categories",
+					"raw": "{{domain}}/categories",
 					"host": [
-						"{{address}}"
+						"{{domain}}"
 					],
 					"path": [
 						"categories"
@@ -38,9 +38,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{address}}/categories",
+					"raw": "{{domain}}/categories",
 					"host": [
-						"{{address}}"
+						"{{domain}}"
 					],
 					"path": [
 						"categories"
@@ -64,9 +64,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{address}}/users",
+					"raw": "{{domain}}/users",
 					"host": [
-						"{{address}}"
+						"{{domain}}"
 					],
 					"path": [
 						"users"
@@ -81,9 +81,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{address}}/users",
+					"raw": "{{domain}}/users",
 					"host": [
-						"{{address}}"
+						"{{domain}}"
 					],
 					"path": [
 						"users"
@@ -98,9 +98,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{address}}/records",
+					"raw": "{{domain}}/records",
 					"host": [
-						"{{address}}"
+						"{{domain}}"
 					],
 					"path": [
 						"records"
@@ -124,9 +124,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{address}}/records",
+					"raw": "{{domain}}/records",
 					"host": [
-						"{{address}}"
+						"{{domain}}"
 					],
 					"path": [
 						"records"
@@ -141,9 +141,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{address}}/records/0",
+					"raw": "{{domain}}/records/0",
 					"host": [
-						"{{address}}"
+						"{{domain}}"
 					],
 					"path": [
 						"records",
@@ -159,9 +159,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{address}}/records/0/0",
+					"raw": "{{domain}}/records/0/0",
 					"host": [
-						"{{address}}"
+						"{{domain}}"
 					],
 					"path": [
 						"records",
@@ -178,9 +178,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{address}}/records?user=0",
+					"raw": "{{domain}}/records?user=0&category=0",
 					"host": [
-						"{{address}}"
+						"{{domain}}"
 					],
 					"path": [
 						"records"
@@ -194,8 +194,7 @@
 						{
 							"key": "category",
 							"value": "0",
-							"description": "Category, used in combination with user",
-							"disabled": true
+							"description": "Category, used in combination with user"
 						}
 					]
 				}
@@ -221,13 +220,6 @@
 					""
 				]
 			}
-		}
-	],
-	"variable": [
-		{
-			"key": "address",
-			"value": "127.0.0.1",
-			"type": "string"
 		}
 	]
 }
