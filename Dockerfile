@@ -1,12 +1,12 @@
 FROM python:3.10.8
 
-ENV FLASK_APP="stealth_webpage"
+ENV FLASK_APP="stealthwebpage"
 
 COPY requirements.txt /opt
 
 RUN python3 -m pip install -r /opt/requirements.txt
 
-COPY stealth_webpage /opt/stealth_webpage
+COPY stealthwebpage /opt/stealthwebpage
 
 WORKDIR /opt
 

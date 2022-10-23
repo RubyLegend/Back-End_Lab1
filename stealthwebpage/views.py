@@ -15,8 +15,8 @@ from datetime import datetime
 from random import random
 from tabnanny import check
 from flask import abort, jsonify, request
-from stealth_webpage import app
-from stealth_webpage.logic import check_if_value_is_present
+from stealthwebpage import app
+from stealthwebpage.logic import check_if_value_is_present
 import sys
 
 categories = [{"id": 0, "name": "test_category"}]

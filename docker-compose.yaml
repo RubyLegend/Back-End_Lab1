@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  stealth_webpage:
+  stealthwebpage:
     restart: always
     build:
       context: .
