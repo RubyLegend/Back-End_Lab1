@@ -31,6 +31,20 @@ records = [
         }
 ]
 
+@app.route("/", methods=['GET'])
+def main():
+    return """
+            <h1>Welcome to the main page</h1>
+            <br/>
+            <p>To test this website, use this endpoints:</p>
+            <ul>
+                <li>/categories (GET, POST)</li>
+                <li>/users (GET, POST)</li>
+                <li>/records (GET, POST)</li>
+            </ul>
+            <br/>
+           """
+
 @app.route("/categories", methods=['GET'])
 def retrieve_categories():
     return jsonify({"categories": categories})
