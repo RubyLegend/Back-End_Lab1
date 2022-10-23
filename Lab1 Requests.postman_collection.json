@@ -1,0 +1,233 @@
+{
+	"info": {
+		"_postman_id": "677eeb7b-6128-4a73-ba1c-89185fd869de",
+		"name": "Lab1 Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23777051"
+	},
+	"item": [
+		{
+			"name": "Categories retrieve data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{address}}/categories",
+					"host": [
+						"{{address}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories add category",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"name\": \"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{address}}/categories",
+					"host": [
+						"{{address}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users add user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"name\": \"guest\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{address}}/users",
+					"host": [
+						"{{address}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users get users list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{address}}/users",
+					"host": [
+						"{{address}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Records get list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{address}}/records",
+					"host": [
+						"{{address}}"
+					],
+					"path": [
+						"records"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Records add record all fields",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"userId\": 0,\n    \"categoryId\": 0,\n    \"date_time\": \"24-10-20 13:07\",\n    \"total\": 150\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{address}}/records",
+					"host": [
+						"{{address}}"
+					],
+					"path": [
+						"records"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Records get records per user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{address}}/records/0",
+					"host": [
+						"{{address}}"
+					],
+					"path": [
+						"records",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Records get records per user and category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{address}}/records/0/0",
+					"host": [
+						"{{address}}"
+					],
+					"path": [
+						"records",
+						"0",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Records get records via query params",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{address}}/records?user=0",
+					"host": [
+						"{{address}}"
+					],
+					"path": [
+						"records"
+					],
+					"query": [
+						{
+							"key": "user",
+							"value": "0",
+							"description": "User, which needed to filter"
+						},
+						{
+							"key": "category",
+							"value": "0",
+							"description": "Category, used in combination with user",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "address",
+			"value": "127.0.0.1",
+			"type": "string"
+		}
+	]
+}
