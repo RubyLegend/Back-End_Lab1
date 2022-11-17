@@ -15,20 +15,27 @@ from datetime import datetime
 from random import random
 from tabnanny import check
 from flask import abort, jsonify, request
+from flask_smorest import Blueprint as blp
+from flask_smorest import Api
+
 from stealthwebpage import app
 from stealthwebpage.logic import check_if_value_is_present
+from stealthwebpage.db import *
 
-categories = [{"id": 0, "name": "test_category"}]
-users = [{"id": 0, "name": "admin"}]
-records = [
-        {
-            "id":0,
-            "userId": 0,
-            "categoryId": 0,
-            "date_time": datetime.now().strftime("%d-%m-%Y %H:%M"),
-            "total": (int)(random()*1000)
-        }
-]
+from stealthwebpage.res.users import blp as UserBlueprint
+
+app.config["PROPAGATE_EXCEPTION"] = True
+app.config["API_TITLE"] = "Stealth Web Page"
+app.config["API_VERSION"] = "v1"
+app.config["OPENAPI_VERSION"] = "3.0.3"
+app.config["OPENAPI_URL_PREFIX"] = "/"
+app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
+app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
+
+api = Api(app)
+
+api.register_blueprint(UserBlueprint)
+
 
 @app.route("/", methods=['GET'])
 def main():
@@ -75,36 +82,36 @@ def create_categories():
     else:
         abort(400) 
 
-@app.route("/users", methods=['GET'])
-def enumerate_user():
-    return jsonify({"users": users})
+# @app.route("/users", methods=['GET'])
+# def enumerate_user():
+#     return jsonify({"users": users})
     
-@app.route("/users", methods=['POST'])
-def create_user():
-    data = dict(request.get_json())  # type: ignore
-    # Two parameters passed
-    if len(data) == 2 and 'id' in data and 'name' in data:
-        # Check if id is already claimed
-        if check_if_value_is_present(users, 'id', data['id']):
-            abort(400, "User ID already claimed.")
-        # If not - append data.
-        users.append(data)
-        return jsonify({"success": "Ok", "data": data})
-    # One parameter passed
-    elif len(data) == 1 and 'name' in data:
-        # If there is no data - set id to 0.
-        if len(users) == 0:
-            data['id'] = 1
-        # Else auto-increment id
-        else:
-            data['id'] = users[-1]['id']+1 # Getting id of last record and incrementing it
-        # Append data
-        users.append(data)
-        return jsonify({"success": "Ok", "data": data})
+# @app.route("/users", methods=['POST'])
+# def create_user():
+#     data = dict(request.get_json())  # type: ignore
+#     # Two parameters passed
+#     if len(data) == 2 and 'id' in data and 'name' in data:
+#         # Check if id is already claimed
+#         if check_if_value_is_present(users, 'id', data['id']):
+#             abort(400, "User ID already claimed.")
+#         # If not - append data.
+#         users.append(data)
+#         return jsonify({"success": "Ok", "data": data})
+#     # One parameter passed
+#     elif len(data) == 1 and 'name' in data:
+#         # If there is no data - set id to 0.
+#         if len(users) == 0:
+#             data['id'] = 1
+#         # Else auto-increment id
+#         else:
+#             data['id'] = users[-1]['id']+1 # Getting id of last record and incrementing it
+#         # Append data
+#         users.append(data)
+#         return jsonify({"success": "Ok", "data": data})
     
-    # If no params passed, or there is more than needed - call error
-    else:
-        abort(400) 
+#     # If no params passed, or there is more than needed - call error
+#     else:
+#         abort(400) 
     
 @app.route("/records", methods=['GET'])
 def get_records():
