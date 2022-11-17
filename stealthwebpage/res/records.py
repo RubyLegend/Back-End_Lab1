@@ -12,6 +12,8 @@ blp = Blueprint("records", __name__, description="Operations on records")
 
 @blp.route("/records")
 class RecordsList(MethodView):
+    @blp.response(200, RecordSchema(many=True), description="If no query args supplied")
+    @blp.response(400, "Only if no valid arguments were supplied as query params")
     def get(self):
         # If there is no query arguments - output all records
         if len(request.args) == 0:
@@ -38,6 +40,7 @@ class RecordsList(MethodView):
             abort(400, message="No valid arguments supplied.")
 
     @blp.arguments(RecordSchema)
+    @blp.response(200, RecordSchema)
     def post(self, record_data):
         # data = dict(request.get_json())  # type: ignore
         # Check if user exists
@@ -64,6 +67,7 @@ class RecordsList(MethodView):
 
 
 @blp.route("/records/<int:user>")
+@blp.response(200, description="Available records for selected user")
 def get_records_per_user(user):
     ret = []
     for el in records:
@@ -74,6 +78,7 @@ def get_records_per_user(user):
 
 # Export records, which are belongs to user and to specific category
 @blp.route("/records/<int:user>/<int:category>")
+@blp.response(200, description="Available records for selected user in some category")
 def get_records_per_user_and_category(user, category):
     ret = []
     for el in records:

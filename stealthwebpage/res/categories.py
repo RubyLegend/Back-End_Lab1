@@ -10,12 +10,16 @@ blp = Blueprint("categories", __name__, description="Operations on categories")
 
 @blp.route("/catorigies/<int:category_id>")
 class CategoryAction(MethodView):
+    @blp.response(200,CategorySchema)
+    @blp.response(400, description="Category not found")
     def get(self, category_id):
         try:
             return categories[category_id]
         except IndexError:
             abort(400, message="Category not found")
     
+    @blp.response(200,CategorySchema)
+    @blp.response(400, description="Category not found")
     def delete(self, category_id):
         try:
             deleted_category = categories[category_id]
@@ -26,10 +30,12 @@ class CategoryAction(MethodView):
 
 @blp.route("/categories")
 class CategoriesList(MethodView):
+    @blp.response(200,CategorySchema(many=True))
     def get(self):
         return jsonify({"categories": categories})
     
     @blp.arguments(CategorySchema)
+    @blp.response(200, CategorySchema)
     def post(self, category_data):
         # data = dict(request.get_json())  # type: ignore
         # If there is no category_data - set id to 1.
