@@ -1,8 +1,8 @@
 from datetime import datetime
 
 from flask.views import MethodView
-from flask import request, abort, jsonify
-from flask_smorest import Blueprint
+from flask import request, jsonify
+from flask_smorest import abort, Blueprint
 
 from stealthwebpage.logic import check_if_value_is_present
 from stealthwebpage.db import records, users, categories
@@ -35,18 +35,18 @@ class RecordsList(MethodView):
                     return get_records_per_user_and_category(user, category)
                 return get_records_per_user(user)
 
-            abort(400, "No valid arguments supplied.")
+            abort(400, message="No valid arguments supplied.")
 
     @blp.arguments(RecordSchema)
     def post(self, record_data):
         # data = dict(request.get_json())  # type: ignore
         # Check if user exists
         if check_if_value_is_present(users, 'id', record_data['user_id']) == False:
-            abort(400, "This user doesn't exists.")
+            abort(400, message="This user doesn't exists.")
 
         # Check if catefory exists
         if check_if_value_is_present(categories, 'id', record_data['category_id']) == False:
-            abort(400, "This category doesn't exists.")
+            abort(400, message="This category doesn't exists.")
 
         # Auto increment id
         if len(records) == 0:

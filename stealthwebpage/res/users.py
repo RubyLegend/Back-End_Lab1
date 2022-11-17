@@ -1,6 +1,6 @@
 from flask.views import MethodView
-from flask import request, abort, jsonify
-from flask_smorest import Blueprint
+from flask import request, jsonify
+from flask_smorest import abort, Blueprint
 
 from stealthwebpage.logic import check_if_value_is_present
 from stealthwebpage.db import users
@@ -14,16 +14,16 @@ class UserActions(MethodView):
     def get(self, user_id):
         try:
             return users[user_id]
-        except KeyError:
-            abort(400, "User not found")
+        except IndexError:
+            abort(400, message="User not found")
     
     def delete(self, user_id):
         try:
             deleted = users[user_id]
             del users[user_id]
-            abort(200, "Ok. Removed.\n" + str(jsonify(deleted)))
-        except KeyError:
-            abort(400, "User not found")
+            abort(200, message="Ok. Removed.\n" + str(jsonify(deleted)))
+        except IndexError:
+            abort(400, message="User not found")
 
 @blp.route("/users")
 class UsersList(MethodView):

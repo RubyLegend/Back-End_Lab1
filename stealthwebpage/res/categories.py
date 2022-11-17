@@ -1,6 +1,6 @@
 from flask.views import MethodView
-from flask import request, abort, jsonify
-from flask_smorest import Blueprint
+from flask import request, jsonify
+from flask_smorest import abort, Blueprint
 
 from stealthwebpage.logic import check_if_value_is_present
 from stealthwebpage.db import categories
@@ -13,16 +13,16 @@ class CategoryAction(MethodView):
     def get(self, category_id):
         try:
             return categories[category_id]
-        except KeyError:
-            abort(400, "Category not found")
+        except IndexError:
+            abort(400, message="Category not found")
     
     def delete(self, category_id):
         try:
             deleted_category = categories[category_id]
             del categories[category_id]
-            abort(200, "Ok. Removed.\n" + str(jsonify(categories[category_id])))
-        except KeyError:
-            abort(400, "Category not found")
+            abort(200, message="Ok. Removed.\n" + str(jsonify(categories[category_id])))
+        except IndexError:
+            abort(400, message="Category not found")
 
 @blp.route("/categories")
 class CategoriesList(MethodView):
