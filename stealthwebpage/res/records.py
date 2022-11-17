@@ -6,30 +6,30 @@ from flask_smorest import abort, Blueprint
 
 from stealthwebpage.logic import check_if_value_is_present
 from stealthwebpage.db import records, users, categories
-from stealthwebpage.schemas import RecordSchema
+from stealthwebpage.schemas import RecordSchema, RecordsQuerySchema
 
 blp = Blueprint("records", __name__, description="Operations on records")
 
 @blp.route("/records")
 class RecordsList(MethodView):
+    @blp.arguments(RecordsQuerySchema, location="query", as_kwargs=True)
     @blp.response(200, RecordSchema(many=True), description="If no query args supplied")
     @blp.response(400, "Only if no valid arguments were supplied as query params")
-    def get(self):
+    def get(self, **kwargs):
         # If there is no query arguments - output all records
-        if len(request.args) == 0:
+        if len(kwargs) == 0:
             return jsonify({"records": records})
 
         # Else parse arguments
         else:
-            args = request.args.to_dict()
             user = int(-1)
             category = int(-1)
             # Check for users
-            if 'user' in args:
-                user = int(args['user'])
+            if 'user' in kwargs:
+                user = int(kwargs['user'])
             # Check for category
-            if 'category' in args:
-                category = int(args['category'])
+            if 'category' in kwargs:
+                category = int(kwargs['category'])
 
             # Handle params based on supplied args
             if user != -1:

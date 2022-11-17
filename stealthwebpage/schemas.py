@@ -14,3 +14,7 @@ class RecordSchema(Schema):
     category_id = fields.Int(required=True)
     datetime = fields.DateTime("%d-%m-%Y %H:%M", required=False)
     total = fields.Float(required=True)
+
+class RecordsQuerySchema(Schema):
+    user = fields.Int(required=True)
+    category = fields.Int(required=False)
