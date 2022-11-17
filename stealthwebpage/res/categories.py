@@ -4,6 +4,7 @@ from flask_smorest import Blueprint
 
 from stealthwebpage.logic import check_if_value_is_present
 from stealthwebpage.db import categories
+from stealthwebpage.schemas import CategorySchema
 
 blp = Blueprint("categories", __name__, description="Operations on categories")
 
@@ -28,29 +29,17 @@ class CategoriesList(MethodView):
     def get(self):
         return jsonify({"categories": categories})
     
-    def post(self):
-        data = dict(request.get_json())  # type: ignore
-        # Two parameters passed
-        if len(data) == 2 and 'id' in data and 'name' in data:
-            # Check if id is already claimed
-            if check_if_value_is_present(categories, 'id', data['id']):
-                abort(400, "Category ID already claimed.")
-            # If not - append data.
-            categories.append(data)
-            return jsonify({"success": "Ok", "data": data})
-        # One parameter passed
-        elif len(data) == 1 and 'name' in data:
-            # If there is no data - set id to 0.
-            if len(categories) == 0:
-                data['id'] = 1
-            # Else auto-increment id
-            else:
-                data['id'] = categories[-1]['id']+1 # Getting id of last record and incrementing it
-            # Append data
-            categories.append(data)
-            return jsonify({"success": "Ok", "data": data})
-        
-        # If no params passed, or there is more than needed - call error
+    @blp.arguments(CategorySchema)
+    def post(self, category_data):
+        # data = dict(request.get_json())  # type: ignore
+        # If there is no category_data - set id to 1.
+        if len(categories) == 0:
+            category_data['id'] = 1
+        # Else auto-increment id
         else:
-            abort(400) 
+            category_data['id'] = categories[-1]['id']+1 # Getting id of last record and incrementing it
+        # Append category_data
+        categories.append(category_data)
+        return jsonify({"success": "Ok", "data": category_data})
+
 
