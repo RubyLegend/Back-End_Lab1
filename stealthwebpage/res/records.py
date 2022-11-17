@@ -14,7 +14,7 @@ blp = Blueprint("records", __name__, description="Operations on records")
 class RecordsList(MethodView):
     @blp.arguments(RecordsQuerySchema, location="query", as_kwargs=True)
     @blp.response(200, RecordSchema(many=True), description="If no query args supplied")
-    @blp.response(400, description="Only if no valid arguments were supplied as query params")
+    @blp.response(400, description="If no valid arguments were supplied as query params")
     def get(self, **kwargs):
         # If there is no query arguments - output all records
         if len(kwargs) == 0:
@@ -68,22 +68,30 @@ class RecordsList(MethodView):
 
 @blp.route("/records/<int:user>")
 @blp.response(200, description="Available records for selected user")
+@blp.response(400, description="User not found")
 def get_records_per_user(user):
     ret = []
-    for el in records:
-        if el['user_id'] == user:
-            ret.append(el)
-    
+    try:
+        for el in records:
+            if el['user_id'] == user:
+                ret.append(el)
+    except KeyError:
+        return abort(400, message="User not found")
+                
     return jsonify({"user":user, "records": ret})
 
 # Export records, which are belongs to user and to specific category
 @blp.route("/records/<int:user>/<int:category>")
 @blp.response(200, description="Available records for selected user in some category")
+@blp.response(400, description="User or category not found")
 def get_records_per_user_and_category(user, category):
     ret = []
-    for el in records:
-        if el['user_id'] == user and el['category_id'] == category:
-            ret.append(el)
-    
+    try:
+        for el in records:
+            if el['user_id'] == user and el['category_id'] == category:
+                ret.append(el)
+    except KeyError:
+        abort(400, message="User or category not found")
+                
     return jsonify({"user":user, "category": category, "records": ret})
 

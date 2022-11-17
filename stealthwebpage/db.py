@@ -6,9 +6,9 @@ users = [{"id": 0, "name": "admin"}]
 records = [
         {
             "id":0,
-            "userId": 0,
-            "categoryId": 0,
-            "date_time": datetime.now().strftime("%d-%m-%Y %H:%M"),
+            "user_id": 0,
+            "category_id": 0,
+            "datetime": datetime.now().strftime("%d-%m-%Y %H:%M"),
             "total": (int)(random()*1000)
         }
 ]
