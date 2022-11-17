@@ -11,16 +11,9 @@
 #   /records[?user=userId[&category=categoryId]]
 #
 
-from datetime import datetime
-from random import random
-from tabnanny import check
-from flask import abort, jsonify, request
-from flask_smorest import Blueprint as blp
 from flask_smorest import Api
 
 from stealthwebpage import app
-from stealthwebpage.logic import check_if_value_is_present
-from stealthwebpage.db import *
 
 from stealthwebpage.res.users import blp as UserBlueprint
 from stealthwebpage.res.categories import blp as CategoriesBlueprint
