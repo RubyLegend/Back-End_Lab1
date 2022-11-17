@@ -20,7 +20,7 @@ class UserActions(MethodView):
         try:
             deleted = users[user_id]
             del users[user_id]
-            abort(200, "Ok. Removed " + str(jsonify(deleted)))
+            abort(200, "Ok. Removed.\n" + str(jsonify(deleted)))
         except KeyError:
             abort(400, "User not found")
 
