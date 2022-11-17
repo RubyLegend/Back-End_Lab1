@@ -14,7 +14,7 @@ blp = Blueprint("records", __name__, description="Operations on records")
 class RecordsList(MethodView):
     @blp.arguments(RecordsQuerySchema, location="query", as_kwargs=True)
     @blp.response(200, RecordSchema(many=True), description="If no query args supplied")
-    @blp.response(400, "Only if no valid arguments were supplied as query params")
+    @blp.response(400, description="Only if no valid arguments were supplied as query params")
     def get(self, **kwargs):
         # If there is no query arguments - output all records
         if len(kwargs) == 0:
