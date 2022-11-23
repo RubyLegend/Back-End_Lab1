@@ -16,5 +16,5 @@ class RecordSchema(Schema):
     total = fields.Float(required=True)
 
 class RecordsQuerySchema(Schema):
-    user = fields.Int(required=True)
+    user = fields.Int(required=False)
     category = fields.Int(required=False)
