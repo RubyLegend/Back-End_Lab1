@@ -15,9 +15,9 @@ from flask_smorest import Api
 
 from stealthwebpage import app
 
-from stealthwebpage.res.users import blp as UserBlueprint
-from stealthwebpage.res.categories import blp as CategoriesBlueprint
-from stealthwebpage.res.records import blp as RecordsBlueprint
+from stealthwebpage.blueprints.users import blp as UserBlueprint
+from stealthwebpage.blueprints.categories import blp as CategoriesBlueprint
+from stealthwebpage.blueprints.records import blp as RecordsBlueprint
 
 app.config["PROPAGATE_EXCEPTION"] = True
 app.config["API_TITLE"] = "Stealth Web Page"
