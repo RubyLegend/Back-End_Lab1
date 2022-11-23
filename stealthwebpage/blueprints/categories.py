@@ -8,7 +8,7 @@ from stealthwebpage.schemas import CategorySchema
 
 blp = Blueprint("categories", __name__, description="Operations on categories")
 
-@blp.route("/catorigies/<int:category_id>")
+@blp.route("/categories/<int:category_id>")
 class CategoryAction(MethodView):
     @blp.response(200,CategorySchema)
     @blp.response(400, description="Category not found")
