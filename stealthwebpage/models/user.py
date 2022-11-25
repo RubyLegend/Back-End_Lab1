@@ -8,3 +8,10 @@ class UserModel(db.Model): # type: ignore
     name = sa.Column(sa.String(128), unique=True, nullable=False)
 
     record = db.relationship("RecordModel", back_populates="user", lazy="dynamic")
+
+    @property
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }

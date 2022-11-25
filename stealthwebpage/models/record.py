@@ -22,3 +22,13 @@ class RecordModel(db.Model): # type: ignore
     
     user = db.relationship("UserModel", back_populates="record")
     category = db.relationship("CategoryModel", back_populates="record")
+
+    @property
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "category_id": self.category_id,
+            "datetime": self.datetime,
+            "total": self.total
+        }

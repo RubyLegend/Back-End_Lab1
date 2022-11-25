@@ -7,3 +7,10 @@ class CategoryModel(db.Model): # type: ignore
     name = db.Column(db.String(128), unique=True, nullable=False)
 
     record = db.relationship("RecordModel", back_populates="category", lazy="dynamic")
+
+    @property
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }
