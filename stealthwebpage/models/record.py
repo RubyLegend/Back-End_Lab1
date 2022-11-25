@@ -20,9 +20,6 @@ class RecordModel(db.Model): # type: ignore
                       unique=False, 
                       nullable=False)
     
-    user = db.relationship("UserModel", back_populates="record")
-    category = db.relationship("CategoryModel", back_populates="record")
-
     @property
     def serialize(self):
         return {

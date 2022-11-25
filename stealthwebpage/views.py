@@ -38,6 +38,13 @@ api = Api(app)
 with app.app_context():
     db.create_all()
 
+# Enforcing foreign key constraints
+def _fk_pragma_on_connect(dbapi_con, con_record):  # noqa
+   dbapi_con.execute('pragma foreign_keys=ON')
+with app.app_context():
+   from sqlalchemy import event
+   event.listen(db.engine, 'connect', _fk_pragma_on_connect)
+
 api.register_blueprint(UserBlueprint)
 api.register_blueprint(CategoriesBlueprint)
 api.register_blueprint(RecordsBlueprint)
