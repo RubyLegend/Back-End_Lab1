@@ -10,6 +10,14 @@ I won't be responsible for any damage, that will be caused by this code
 (broken server, nuclear war, computer overheating...).
 ```
 
+--------------------------------------------------------
+
+## Determining variant
+- Group: IK-01
+- 1 % 3 = 1
+
+So, my own task is: "Валюти".
+
 ## How to run it locally
 1. Install [docker](https://www.docker.com/)
 2. Install [docker compose](https://github.com/docker/compose)
