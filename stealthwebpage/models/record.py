@@ -19,6 +19,10 @@ class RecordModel(db.Model): # type: ignore
     total = sa.Column(sa.Float(precision=2), 
                       unique=False, 
                       nullable=False)
+    currency_id = sa.Column(sa.Integer, 
+                            sa.ForeignKey("currencies.id"), 
+                            unique=False,
+                            server_default="1")
     
     @property
     def serialize(self):
@@ -27,5 +31,6 @@ class RecordModel(db.Model): # type: ignore
             "user_id": self.user_id,
             "category_id": self.category_id,
             "datetime": self.datetime,
-            "total": self.total
+            "total": self.total,
+            "currency_id": self.currency_id
         }

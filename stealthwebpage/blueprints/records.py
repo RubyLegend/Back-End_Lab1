@@ -52,8 +52,8 @@ class RecordsList(MethodView):
         try:
             db.session.add(record)
             db.session.commit()
-        except IntegrityError:
-            abort(400, message="Foreign key constraint failed.")
+        except IntegrityError as e:
+            abort(400, message=["Some data failed to insert.", e.args[0]])
         return jsonify({"success": "Ok", "data": record.serialize})
 
 

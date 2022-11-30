@@ -41,6 +41,6 @@ class UsersList(MethodView):
         try:
             db.session.add(user)
             db.session.commit()
-        except IntegrityError:
-            abort(400, message="User with this name already exists")
+        except IntegrityError as e:
+            abort(400, message=["Some data failed validation.", e.args[0]])
         return jsonify({"status": "Ok", "data": user_data})

@@ -3,6 +3,11 @@ from marshmallow import Schema, fields
 class UserSchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.Str(required=True)
+    currency_id = fields.Int(required=False)
+
+class CurrencySchema(Schema):
+    id = fields.Int(dump_only=True)
+    name = fields.Str(required=True)
 
 class CategorySchema(Schema):
     id = fields.Int(dump_only=True)
@@ -14,6 +19,7 @@ class RecordSchema(Schema):
     category_id = fields.Int(required=True)
     datetime = fields.DateTime("%d-%m-%Y %H:%M", required=False)
     total = fields.Float(required=True)
+    currency_id = fields.Int(required=False)
 
 class RecordsQuerySchema(Schema):
     user = fields.Int(required=False)

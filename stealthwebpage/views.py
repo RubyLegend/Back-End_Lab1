@@ -18,8 +18,11 @@ from stealthwebpage import app
 from stealthwebpage.blueprints.users import blp as UserBlueprint
 from stealthwebpage.blueprints.categories import blp as CategoriesBlueprint
 from stealthwebpage.blueprints.records import blp as RecordsBlueprint
+from stealthwebpage.blueprints.currencies import blp as CurrencyBlueprint
 
 from stealthwebpage.db import db
+from stealthwebpage.models.currency import CurrencyModel
+from sqlalchemy.exc import IntegrityError
 
 app.config["PROPAGATE_EXCEPTION"] = True
 app.config["API_TITLE"] = "Stealth Web Page"
@@ -38,8 +41,19 @@ api = Api(app)
 with app.app_context():
     db.create_all()
 
+with app.app_context():
+    # IDK why, but this code executes twice, so in case of second execution
+    # database will drop IntegrityError, which I'll simply skip
+    try:
+        # Inserting default value in table "Currency"
+        currency_default_data = CurrencyModel(name='Hryvnia')
+        db.session.add(currency_default_data)
+        db.session.commit()
+    except IntegrityError:
+        pass
+    
 # Enforcing foreign key constraints
-def _fk_pragma_on_connect(dbapi_con, con_record):  # noqa
+def _fk_pragma_on_connect(dbapi_con, con_record):
    dbapi_con.execute('pragma foreign_keys=ON')
 with app.app_context():
    from sqlalchemy import event
@@ -48,6 +62,7 @@ with app.app_context():
 api.register_blueprint(UserBlueprint)
 api.register_blueprint(CategoriesBlueprint)
 api.register_blueprint(RecordsBlueprint)
+api.register_blueprint(CurrencyBlueprint)
 
 @app.route("/", methods=['GET'])
 def main():
