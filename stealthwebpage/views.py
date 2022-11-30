@@ -71,8 +71,9 @@ def main():
             <br/>
             <p>To test this website, use this endpoints:</p>
             <ul>
-                <li>/categories (GET, POST)</li>
-                <li>/users (GET, POST)</li>
+                <li>/categories (GET, POST, DELETE)</li>
+                <li>/users (GET, POST, DELETE)</li>
+                <li>/currencies (GET, POST, DELETE)</li>
                 <li>/records (GET, POST)</li>
                 <li>/swagger-ui</li>
             </ul>
