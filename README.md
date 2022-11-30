@@ -18,6 +18,14 @@ I won't be responsible for any damage, that will be caused by this code
 
 So, my own task is: "Валюти".
 
+## Available endpoints
+- / - main page
+- /users (GET, POST, DELETE) - actions with users
+- /categories (GET, POST, DELETE) - actions with categories
+- /records (GET, POST) - actions with records
+- /currencies (GET, POST, DELETE) - actions with currencies
+- /swagger-ui - self-documented code
+
 ## How to run it locally
 1. Install [docker](https://www.docker.com/)
 2. Install [docker compose](https://github.com/docker/compose)
