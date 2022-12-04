@@ -24,13 +24,49 @@
 			"response": []
 		},
 		{
+			"name": "Categories get category by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/categories/3",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"categories",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories delete category by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/categories/1",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"categories",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Categories add category",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"name\": \"test\"\n}",
+					"raw": "{\n    \"name\": \"test\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -56,7 +92,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"name\": \"guest\"\n}",
+					"raw": "{\n    \"name\": \"test\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -76,6 +112,32 @@
 			"response": []
 		},
 		{
+			"name": "Currency add currency",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"test\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/currencies",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"currencies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Users get users list",
 			"request": {
 				"method": "GET",
@@ -87,6 +149,77 @@
 					],
 					"path": [
 						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Currency get currency list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/currencies",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"currencies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users get user by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/users/1",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/users/1",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Currency delete currency",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/users/2",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users",
+						"2"
 					]
 				}
 			},
@@ -116,7 +249,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 1,\n    \"userId\": 0,\n    \"categoryId\": 0,\n    \"date_time\": \"24-10-20 13:07\",\n    \"total\": 150\n}",
+					"raw": "{\n    \"user_id\": 1,\n    \"category_id\": 1,\n    \"total\": 155\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -141,13 +274,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{domain}}/records/0",
+					"raw": "{{domain}}/records/2",
 					"host": [
 						"{{domain}}"
 					],
 					"path": [
 						"records",
-						"0"
+						"2"
 					]
 				}
 			},
@@ -159,14 +292,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{domain}}/records/0/0",
+					"raw": "{{domain}}/records/1/1",
 					"host": [
 						"{{domain}}"
 					],
 					"path": [
 						"records",
-						"0",
-						"0"
+						"1",
+						"1"
 					]
 				}
 			},
@@ -178,7 +311,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{domain}}/records?user=0&category=0",
+					"raw": "{{domain}}/records?user=1&category=1",
 					"host": [
 						"{{domain}}"
 					],
@@ -188,12 +321,12 @@
 					"query": [
 						{
 							"key": "user",
-							"value": "0",
+							"value": "1",
 							"description": "User, which needed to filter"
 						},
 						{
 							"key": "category",
-							"value": "0",
+							"value": "1",
 							"description": "Category, used in combination with user"
 						}
 					]
