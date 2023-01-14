@@ -38,10 +38,12 @@ class UserActions(MethodView):
 @blp.route("/users")
 class UsersList(MethodView):
     @blp.response(200,UserSchema(many=True))
-    @jwt_required
+    @jwt_required()
     def get(self):
         return UserModel.query.all()
     
+@blp.route("/register")
+class UserRegister(MethodView):
     @blp.arguments(UserSchema)
     @blp.response(200,UserSchema)
     def post(self, user_data):

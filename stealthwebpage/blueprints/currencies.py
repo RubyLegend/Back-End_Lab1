@@ -39,7 +39,7 @@ class CurrenciesList(MethodView):
     
     @blp.arguments(CurrencySchema)
     @blp.response(200,CurrencySchema)
-    @jwt_required
+    @jwt_required()
     def post(self, currency_data):
         currency = CurrencyModel(**currency_data)
         try:
