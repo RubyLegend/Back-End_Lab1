@@ -4,6 +4,8 @@ ENV FLASK_APP="stealthwebpage"
 
 ENV FLASK_DEBUG=$FLASK_DEBUG
 
+ENV JWT_SECRET_KEY=$JWT_SECRET_KEY
+
 COPY requirements.txt /opt
 
 RUN python3 -m pip install -r /opt/requirements.txt

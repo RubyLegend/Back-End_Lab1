@@ -11,5 +11,6 @@ services:
     environment:
       PORT: 80
       FLASK_DEBUG: True
+      JWT_SECRET_KEY: "" 
     ports:
       - "80:80"
