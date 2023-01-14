@@ -1,6 +1,7 @@
 from passlib.hash import pbkdf2_sha256
 
 from flask_jwt_extended import create_access_token
+from flask_jwt_extended import jwt_required
 
 from flask.views import MethodView
 from flask import jsonify
@@ -19,12 +20,14 @@ blp = Blueprint("users", __name__, description="Operations on users")
 class UserActions(MethodView):
     @blp.response(200,UserSchema)
     @blp.response(404,description="User not found")
+    @jwt_required()
     def get(self, user_id):
         result = UserModel.query.get_or_404(user_id)
         return jsonify({"status": "OK", "result": result.serialize})
     
     @blp.response(200,UserSchema)
     @blp.response(404,description="User not found")
+    @jwt_required()
     def delete(self, user_id):
         user = UserModel.query.get_or_404(user_id)
         user_data = user.serialize
@@ -35,6 +38,7 @@ class UserActions(MethodView):
 @blp.route("/users")
 class UsersList(MethodView):
     @blp.response(200,UserSchema(many=True))
+    @jwt_required
     def get(self):
         return UserModel.query.all()
     

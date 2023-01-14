@@ -1,3 +1,5 @@
+from flask_jwt_extended import jwt_required
+
 from flask.views import MethodView
 from flask import jsonify
 from flask_smorest import abort, Blueprint
@@ -20,6 +22,7 @@ class CategoryAction(MethodView):
     
     @blp.response(200,CategorySchema)
     @blp.response(404, description="Category not found")
+    @jwt_required()
     def delete(self, category_id):
         user = CategoryModel.query.get_or_404(category_id)
         user_data = user.serialize
@@ -35,6 +38,7 @@ class CategoriesList(MethodView):
     
     @blp.arguments(CategorySchema)
     @blp.response(200, CategorySchema)
+    @jwt_required()
     def post(self, category_data):
         category = CategoryModel(**category_data)
         try:

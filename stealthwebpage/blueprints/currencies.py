@@ -1,3 +1,5 @@
+from flask_jwt_extended import jwt_required
+
 from flask.views import MethodView
 from flask import jsonify
 from flask_smorest import abort, Blueprint
@@ -21,6 +23,7 @@ class CurrencyActions(MethodView):
     
     @blp.response(200,CurrencySchema)
     @blp.response(404,description="Currency not found")
+    @jwt_required()
     def delete(self, currency_id):
         currency = CurrencyModel.query.get_or_404(currency_id)
         currency_data = currency.serialize
@@ -36,6 +39,7 @@ class CurrenciesList(MethodView):
     
     @blp.arguments(CurrencySchema)
     @blp.response(200,CurrencySchema)
+    @jwt_required
     def post(self, currency_data):
         currency = CurrencyModel(**currency_data)
         try:

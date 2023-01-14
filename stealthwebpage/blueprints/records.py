@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from flask_jwt_extended import jwt_required
+
 from flask.views import MethodView
 from flask import request, jsonify
 from flask_smorest import abort, Blueprint
@@ -17,6 +19,7 @@ class RecordsList(MethodView):
     @blp.arguments(RecordsQuerySchema, location="query", as_kwargs=True)
     @blp.response(200, RecordSchema(many=True), description="If no query args supplied")
     @blp.response(400, description="If no valid arguments were supplied as query params")
+    @jwt_required()
     def get(self, **kwargs):
         # If there is no query arguments - output all records
         if len(kwargs) == 0:
@@ -47,6 +50,7 @@ class RecordsList(MethodView):
 
     @blp.arguments(RecordSchema)
     @blp.response(200, RecordSchema)
+    @jwt_required()
     def post(self, record_data):
         record = RecordModel(**record_data)
         try:
@@ -60,6 +64,7 @@ class RecordsList(MethodView):
 @blp.route("/records/<int:user>")
 @blp.response(200, description="Available records for selected user")
 @blp.response(400, description="User not found")
+@jwt_required()
 def get_records_per_user(user):
     records = RecordModel.query.filter(RecordModel.user_id == user).all()
     ret = []
@@ -72,6 +77,7 @@ def get_records_per_user(user):
 @blp.route("/records/<int:user>/<int:category>")
 @blp.response(200, description="Available records for selected user in some category")
 @blp.response(400, description="User or category not found")
+@jwt_required()
 def get_records_per_user_and_category(user, category):
     records = RecordModel.query.filter(RecordModel.user_id == user, RecordModel.category_id == category).all()
     ret = []
